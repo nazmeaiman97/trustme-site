@@ -25,14 +25,14 @@ var CFG = {
 *{box-sizing:border-box}html,body{margin:0;background:var(--bg)}
 body{font:16px/1.55 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;color:var(--ink);overflow-x:hidden}
 main{max-width:520px;margin:0 auto;padding:18px 16px 40px}
-header{display:flex;align-items:center;gap:12px;margin:4px 0 14px;color:#fff}
+header{display:flex;align-items:center;justify-content:center;gap:12px;margin:4px 0 14px;color:#fff}
 header img{width:52px;height:52px;border-radius:12px}
 header h1{margin:0;font-size:24px;color:var(--gold);letter-spacing:.5px;line-height:1.1}
 header p{margin:2px 0 0;color:#d9d3f5;font-size:14px}
-.hero{position:relative;margin:0 auto;width:min(100%,300px);aspect-ratio:9/16;border-radius:28px;overflow:hidden;
+.hero{position:relative;margin:0 auto;width:min(100%,330px);aspect-ratio:810/1206;border-radius:22px;overflow:hidden;
   background:#14122b;box-shadow:0 10px 40px rgba(0,0,0,.45),0 0 0 6px #14122b}
 .hero video,.hero img{width:100%;height:100%;object-fit:cover;display:block}
-.line{margin:22px 4px 6px;text-align:center;color:#fff;font-weight:800;font-size:clamp(24px,7vw,32px);line-height:1.15;letter-spacing:.2px}
+.line{margin:22px 4px 6px;text-align:center;color:#fff;font-weight:800;font-size:clamp(24px,7vw,32px);line-height:1.15;letter-spacing:.2px;text-wrap:balance}
 .line span{color:var(--gold)}
 .sub{margin:0 0 18px;text-align:center;color:#d9d3f5;font-size:15px}
 .stores{display:flex;flex-direction:column;align-items:center;gap:12px;margin:0 0 22px}
@@ -56,7 +56,7 @@ a{color:var(--purple)}
 
 <div class="hero"><video src="hero.mp4" poster="hero.jpg" autoplay muted loop playsinline preload="metadata" aria-label="Gameplay: the Host lies, the hero dies"></video></div>
 
-<p class="line">The game tells you what to do. <span>It's lying.</span></p>
+<p class="line">The game tells you what to do.<br><span>It's lying.</span></p>
 <p class="sub">A troll platformer. 60 levels, the first 40 free, no ads.</p>
 
 <div class="stores" id="stores">
