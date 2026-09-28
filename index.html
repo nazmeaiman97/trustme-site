@@ -1,22 +1,109 @@
 <!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>TRUST ME</title><link rel="icon" href="icon.png"><style>
-:root{--bg:#2a2350;--card:#fffaf0;--ink:#1a1633;--gold:#ffd23f;--purple:#8a5cff;--muted:#5b5570}
-@media (prefers-color-scheme:dark){:root:not([data-theme=light]){--card:#1f1b3a;--ink:#f2eefc;--muted:#b9b2d6}}
-*{box-sizing:border-box}body{margin:0;background:var(--bg);font:16px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;color:var(--ink)}
-main{max-width:760px;margin:0 auto;padding:24px 16px 48px}
-header{display:flex;align-items:center;gap:14px;margin:8px 0 18px;color:#fff}
-header img{width:64px;height:64px;border-radius:14px}
-header h1{margin:0;font-size:26px;color:var(--gold);letter-spacing:.5px}
+<title>TRUST ME - A Fair Game</title><link rel="icon" href="icon.png">
+<meta name="description" content="The game tells you what to do. It's lying. A troll platformer: 60 levels, the first 40 free with no ads.">
+<meta property="og:title" content="TRUST ME - A Fair Game"><meta property="og:description" content="The game tells you what to do. It's lying.">
+<meta property="og:image" content="https://nazmeaiman97.github.io/trustme-site/og.jpg"><meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<!--
+  The ad campaign's landing page (RagePrototypes/Art/ad3/PLAN.md §6). Every bio links here with its source:
+    ?src=tiktok | instagram | youtube            organic: Play gets utm_source=<src>&utm_medium=organic&utm_campaign=ad3_bio,
+                                                 the App Store gets ct=<src>_bio
+    ?src=tiktok_paid&ad=bh4                      paid: Play gets utm_source=tiktok&utm_medium=paid&utm_campaign=ad3_bh4
+  The badges are plain links (no auto-redirect). No cookies, no trackers: the tags ride on the store links only.
+  Set the flags below when each store goes live (the official badges may only link to a live app).
+-->
+<script>
+var CFG = {
+  ios:     { live: false, appId: '', pt: '' },          // App Store Connect: the app's Apple ID (digits) and the provider token
+  android: { live: false, pkg: 'com.ragegames.trustme',
+             beta: 'beta.html' }                        // before Play is live: how to join the closed test
+};
+</script>
+<style>
+:root{--bg:#2a2350;--card:#fffaf0;--ink:#1a1633;--gold:#ffd23f;--purple:#8a5cff;--muted:#5b5570;--pill:#3b3170}
+@media (prefers-color-scheme:dark){:root:not([data-theme=light]){--card:#1f1b3a;--ink:#f2eefc;--muted:#b9b2d6;--purple:#b79bff}}
+*{box-sizing:border-box}html,body{margin:0;background:var(--bg)}
+body{font:16px/1.55 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;color:var(--ink);overflow-x:hidden}
+main{max-width:520px;margin:0 auto;padding:18px 16px 40px}
+header{display:flex;align-items:center;gap:12px;margin:4px 0 14px;color:#fff}
+header img{width:52px;height:52px;border-radius:12px}
+header h1{margin:0;font-size:24px;color:var(--gold);letter-spacing:.5px;line-height:1.1}
 header p{margin:2px 0 0;color:#d9d3f5;font-size:14px}
-.card{background:var(--card);border-radius:18px;padding:22px 20px;box-shadow:0 6px 24px rgba(0,0,0,.25)}
-.card h1{font-size:22px;margin-top:0}.card h2{font-size:18px;margin-top:22px}
-a{color:var(--purple)}li{margin:6px 0}nav{margin:18px 0 0;text-align:center}nav a{color:#fff;margin:0 10px}
-.muted{color:var(--muted);font-size:14px}
+.hero{position:relative;margin:0 auto;width:min(100%,300px);aspect-ratio:9/16;border-radius:28px;overflow:hidden;
+  background:#14122b;box-shadow:0 10px 40px rgba(0,0,0,.45),0 0 0 6px #14122b}
+.hero video,.hero img{width:100%;height:100%;object-fit:cover;display:block}
+.line{margin:22px 4px 6px;text-align:center;color:#fff;font-weight:800;font-size:clamp(24px,7vw,32px);line-height:1.15;letter-spacing:.2px}
+.line span{color:var(--gold)}
+.sub{margin:0 0 18px;text-align:center;color:#d9d3f5;font-size:15px}
+.stores{display:flex;flex-direction:column;align-items:center;gap:12px;margin:0 0 22px}
+.badge{display:inline-block;line-height:0;border-radius:10px}
+.badge img{height:56px;width:auto}
+.badge.play img{height:82px;margin:-13px 0}                 /* Google's badge art carries its own margin */
+.badge:focus-visible{outline:3px solid var(--gold);outline-offset:4px}
+.soon{display:flex;align-items:center;justify-content:center;gap:8px;min-width:230px;padding:14px 18px;border-radius:14px;
+  background:var(--pill);color:#fff;font-weight:700;font-size:16px}
+.soon small{font-weight:600;color:#d9d3f5}
+.beta{color:var(--gold);font-size:15px;font-weight:700}
+.card{background:var(--card);border-radius:18px;padding:18px 18px 16px;box-shadow:0 6px 24px rgba(0,0,0,.25)}
+.card h2{font-size:17px;margin:0 0 8px}.card ul{margin:0;padding-left:20px}li{margin:5px 0}
+.search{margin:14px 0 0;font-size:14px;color:var(--muted)}
+.search b{color:var(--ink)}
+nav{margin:18px 0 6px;text-align:center}nav a{color:#fff;margin:0 10px}
+.legal{margin:10px 0 0;text-align:center;color:#a79fcb;font-size:11px;line-height:1.4}
+a{color:var(--purple)}
 </style></head><body><main>
-<header><img src="icon.png" alt="TRUST ME icon"><div><h1>TRUST ME</h1><p>A totally fair game. *not actually fair</p></div></header>
-<div class="card"><h1>The rage game that lies to you</h1>
-<p>Meet the Host: a smug purple showman with a bowler hat, a monocle, and zero honesty. Before every level he tells you exactly what to do. Trust him. Then die.</p>
-<ul><li>60 troll levels (the first 40 are free, with no ads)</li><li>A Duo mode where the game blames your friend</li><li>Record your own death screams</li></ul>
-<p><a href="support.html">Support</a> &middot; <a href="privacy.html">Privacy Policy</a></p></div>
-<nav><a href="index.html">Home</a><a href="support.html">Support</a><a href="privacy.html">Privacy</a></nav>
-</main></body></html>
+<header><img src="icon512.png" alt="TRUST ME icon"><div><h1>TRUST ME</h1><p>A totally fair game. *not actually fair</p></div></header>
+
+<div class="hero"><video src="hero.mp4" poster="hero.jpg" autoplay muted loop playsinline preload="metadata" aria-label="Gameplay: the Host lies, the hero dies"></video></div>
+
+<p class="line">The game tells you what to do. <span>It's lying.</span></p>
+<p class="sub">A troll platformer. 60 levels, the first 40 free, no ads.</p>
+
+<div class="stores" id="stores">
+  <noscript>
+    <a href="https://play.google.com/store/apps/details?id=com.ragegames.trustme">Get it on Google Play</a>
+  </noscript>
+</div>
+
+<div class="card">
+  <h2>How it works</h2>
+  <ul>
+    <li>Before every level, the Host (a smug purple showman with a monocle) tells you exactly what to do.</li>
+    <li>He's lying. Floors vanish, doors run away, and even the LEVEL COMPLETE screen is fake.</li>
+    <li>Record your own death scream: the game plays it every time you die.</li>
+    <li>Duo mode: the game blames your friend.</li>
+  </ul>
+  <p class="search">In the store, search <b>"trust me fair game"</b>.</p>
+</div>
+
+<nav><a href="support.html">Support</a><a href="privacy.html">Privacy</a></nav>
+<p class="legal">Apple and the Apple logo are trademarks of Apple Inc., registered in the U.S. and other countries. App Store is a service mark of Apple Inc.
+Google Play and the Google Play logo are trademarks of Google LLC.</p>
+</main>
+<script>
+(function () {
+  var q = new URLSearchParams(location.search);
+  var clean = function (v, n) { return (v || '').toLowerCase().replace(/[^a-z0-9_]/g, '').slice(0, n); };
+  var src = clean(q.get('src'), 32) || 'direct';
+  var ad = clean(q.get('ad'), 12);
+  var paid = /_paid$/.test(src);
+  var source = src.replace(/_paid$/, '');
+  var campaign = paid && ad ? 'ad3_' + ad : 'ad3_bio';
+  var play = 'https://play.google.com/store/apps/details?id=' + CFG.android.pkg + '&referrer=' +
+    encodeURIComponent('utm_source=' + source + '&utm_medium=' + (paid ? 'paid' : 'organic') + '&utm_campaign=' + campaign);
+  var ios = 'https://apps.apple.com/app/apple-store/id' + CFG.ios.appId + '?' + (CFG.ios.pt ? 'pt=' + CFG.ios.pt + '&' : '') +
+    'ct=' + encodeURIComponent((src + (ad ? '_' + ad : '') + '_bio').slice(0, 100)) + '&mt=8';
+  var box = document.getElementById('stores');
+  var add = function (html) { var d = document.createElement('div'); d.innerHTML = html; box.appendChild(d.firstElementChild); };
+  if (CFG.ios.live && CFG.ios.appId)
+    add('<a class="badge" href="' + ios + '"><img src="badge_appstore.svg" alt="Download on the App Store"></a>');
+  else add('<div class="soon">iPhone <small>coming soon</small></div>');
+  if (CFG.android.live)
+    add('<a class="badge play" href="' + play + '"><img src="badge_googleplay.png" alt="Get it on Google Play"></a>');
+  else {
+    add('<div class="soon">Android <small>in beta</small></div>');
+    if (CFG.android.beta) add('<a class="beta" href="' + CFG.android.beta + '">Join the Android test →</a>');
+  }
+})();
+</script>
+</body></html>
