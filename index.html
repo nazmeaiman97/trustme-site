@@ -32,7 +32,10 @@ header p{margin:2px 0 0;color:#d9d3f5;font-size:14px}
 .hero{position:relative;margin:0 auto;width:min(100%,330px);aspect-ratio:810/1206;border-radius:22px;overflow:hidden;
   background:#14122b;box-shadow:0 10px 40px rgba(0,0,0,.45),0 0 0 6px #14122b}
 .hero video,.hero img{width:100%;height:100%;object-fit:cover;display:block}
-.line{margin:22px 4px 6px;text-align:center;color:#fff;font-weight:800;font-size:clamp(24px,7vw,32px);line-height:1.15;letter-spacing:.2px;text-wrap:balance}
+.sndrow{text-align:center;margin:12px 0 0}
+.snd{border:0;border-radius:999px;padding:10px 18px;background:#3b3170;color:#fff;font:700 15px/1 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;box-shadow:0 2px 10px rgba(0,0,0,.35);cursor:pointer}
+.snd:focus-visible{outline:3px solid var(--gold);outline-offset:3px}
+.line{margin:16px 4px 6px;text-align:center;color:#fff;font-weight:800;font-size:clamp(24px,7vw,32px);line-height:1.15;letter-spacing:.2px;text-wrap:balance}
 .line span{color:var(--gold)}
 .sub{margin:0 0 18px;text-align:center;color:#d9d3f5;font-size:15px}
 .stores{display:flex;flex-direction:column;align-items:center;gap:12px;margin:0 0 22px}
@@ -54,7 +57,8 @@ a{color:var(--purple)}
 </style></head><body><main>
 <header><img src="icon512.png" alt="TRUST ME icon"><div><h1>TRUST ME</h1><p>A totally fair game. *not actually fair</p></div></header>
 
-<div class="hero"><video src="hero.mp4" poster="hero.jpg" autoplay muted loop playsinline preload="metadata" aria-label="Gameplay: the Host lies, the hero dies"></video></div>
+<div class="hero"><video id="hero" src="hero.mp4" poster="hero.jpg" autoplay muted loop playsinline preload="metadata" aria-label="Gameplay: the Host lies, the hero dies"></video></div>
+<div class="sndrow"><button class="snd" id="snd" type="button" aria-pressed="false">🔊 Tap for sound</button></div>
 
 <p class="line">The game tells you what to do.<br><span>It's lying.</span></p>
 <p class="sub">A troll platformer. 60 levels, the first 40 free, no ads.</p>
@@ -93,6 +97,12 @@ Google Play and the Google Play logo are trademarks of Google LLC.</p>
     encodeURIComponent('utm_source=' + source + '&utm_medium=' + (paid ? 'paid' : 'organic') + '&utm_campaign=' + campaign);
   var ios = 'https://apps.apple.com/app/apple-store/id' + CFG.ios.appId + '?' + (CFG.ios.pt ? 'pt=' + CFG.ios.pt + '&' : '') +
     'ct=' + encodeURIComponent((src + (ad ? '_' + ad : '') + '_bio').slice(0, 100)) + '&mt=8';
+  // browsers only autoplay muted: a tap turns the sound on (from the top, so the joke lands) and off again
+  var v = document.getElementById('hero'), snd = document.getElementById('snd');
+  snd.addEventListener('click', function () {
+    if (v.muted) { v.muted = false; v.currentTime = 0; v.play(); snd.textContent = '\uD83D\uDD07 Mute'; snd.setAttribute('aria-pressed', 'true'); }
+    else { v.muted = true; snd.textContent = '\uD83D\uDD0A Tap for sound'; snd.setAttribute('aria-pressed', 'false'); }
+  });
   var box = document.getElementById('stores');
   var add = function (html) { var d = document.createElement('div'); d.innerHTML = html; box.appendChild(d.firstElementChild); };
   if (CFG.ios.live && CFG.ios.appId)
